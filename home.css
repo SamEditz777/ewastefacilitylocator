@@ -1,0 +1,456 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;  
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+  background-color: #333;
+}
+
+.logo {
+  font-size: 2em;
+  color: #fff;
+  user-select: none;
+}
+
+.navigation {
+  display: flex;
+}
+
+.navigation a {
+  position: relative;
+  font-size: 1.4em;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 40px;
+  margin-top: 15px;
+}
+
+.navigation a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  width: 100%;
+  height: 3px;
+  background: #40ff00;
+  border-radius: 5px;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.5s;
+}
+
+.navigation a:hover::after {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.navigation .btnLogout {
+  width: 130px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #ffffff;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.3em;
+  color: #ffffff;
+  font-weight: 500;
+  margin-left: 40px;
+  transition: 0.5s;
+}
+
+.navigation .btnLogout:hover {
+  background: #40ff00;
+  color: #000000;
+}
+
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  background-color: #222;
+  color: #fff;
+  padding: 20px;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: -200px;
+  transition: left 0.3s ease;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+  margin-bottom: 10px;
+  transition: color 0.3s;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+  color: #40ff00;
+}
+
+/* Add styling for sidebar toggle button */
+#toggleSidebarBtn {
+  display: none;
+  font-size: 2em;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 10px;
+  z-index: 1002; /* Set a higher z-index than the sidebar */
+  color: #fff;
+  background: #40ff00;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+#toggleSidebarBtn:hover {
+  color: #ffffff;
+  background: #40ff0000;
+  z-index: 1003; /* Ensure it's above other elements during hover */
+}
+
+/* Ensure the button pushes aside the letters */
+.header-content {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1000; /* Set a lower z-index than the sidebar */
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+#deviceEstimateForm,
+.feedback-form {
+  max-width: 380px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+select,
+input[type="name"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+
+}
+
+.text-container {
+  width: 130%; /* Adjust the width as needed */
+  margin-bottom: 20px;
+}
+
+
+.text-container h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.text-container p {
+  font-size: 1.2rem;
+  color: #666;
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+  width: 200%;
+}
+
+
+/* Style for img-container */
+.img-container {
+  width: 45%; /* Adjust the width as needed */
+  margin-left: 10px;
+}
+
+.img-container img {
+  max-width: 100%;
+  border-radius: 8px; /* Add rounded corners to the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+
+/* Media query to show toggle-sidebar button on smaller screens */
+@media (max-width: 768px) {
+  .toggle-sidebar {
+    display: block; /* Show on screens up to 768px width (typical tablet and mobile sizes) */
+  }
+
+  .form-container {
+    flex-direction: column;
+  }
+
+  .navigation {
+    display: none; /* Initially hide on smaller screens */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px; /* Adjust the width as needed */
+    background-color: #40ff00;
+    padding-top: 15px;
+    z-index: 1000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .navigation.show {
+    display: flex;
+    flex-direction: column;
+    background-color: #40ff00; /* Add this line to set the background color */
+  }
+
+  .navigation a {
+    display: block;
+    padding: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+  }
+
+  .navigation a:hover {
+    background-color: #40ff00;
+  }
+
+  .sidebar {
+    display: none; /* Hide sidebar on smaller screens */
+  }
+
+  #toggleSidebarBtn {
+    display: flex; /* Show toggle button on smaller screens */
+  }
+}
+
+.hero {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f0f0;
+  background-image: url('Img/fotor-ai-2024020624549.jpg'); /* Add your hero background image URL */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.hero h1,
+.hero p {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #40ff00;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 35px;
+  color: #ffffff;
+  background-color: #00000029;
+  transition: transform 0.3s ease;
+}
+
+.hero p:hover {
+  transform: scale(1.1);
+}
+
+.hero p:hover {
+  transform: scale(1.1); /* Scale the element on hover to make it appear forward */
+}
+
+.hero button {
+  background-color: #40ff00;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero button:hover {
+  background-color: #007bff;
+}
+
+.text-container {
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap; /* Allow flex items to wrap to the next line */
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 95px;
+}
+
+.text-content {
+  max-width: 400px; /* Adjust the maximum width as needed for each set of text */
+  margin-right: 30px; /* Add some space between the text sets */
+  margin-bottom: 20px; /* Add some space between the text sets */
+}
+
+.footer {
+  position: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 50px 0;
+  text-align: center;
+  z-index: 100;
+}
+
+.footer p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: #40ff00;
+}
+
+/* Additional element styles */
+.additional-element {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.whatsapp-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  padding: 10px;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 80px;
+  background-color: #007bff;
+  padding: 10px;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.whatsapp-icon:hover,
+.email-icon:hover {
+  background-color: #128C7E;
+}
+
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.progress-bar {
+  width: 50px;
+  height: 5px;
+  background-color: #4CAF50;
+  margin-bottom: 10px;
+}
+
+.progress-text {
+  color: white;
+  text-align: center;
+  margin: 0;
+}

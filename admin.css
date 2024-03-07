@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5em;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+}
+
+.btnLogout {
+    background-color: #40ff00;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-left: 10px;
+}
+
+.admin-panel {
+    margin: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add this CSS block to your existing styles */
+
+.feedback-list {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#feedbackTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#feedbackTable th,
+#feedbackTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#feedbackTable thead {
+    background-color: #27ae60;
+    color: #fff;
+}
+
+#feedbackTable tbody tr:hover {
+    background-color: #ecf0f1;
+}
+
+.progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: none; /* Initially hide the progress container */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Higher z-index to make it appear above other elements */
+  }
+  
+  /* Add this style for the progress bar */
+  .progress-bar {
+    width: 50px; /* Adjust the width of the progress bar as needed */
+    height: 5px; /* Adjust the height of the progress bar as needed */
+    background-color: #4CAF50; /* Green color */
+    margin-bottom: 10px; /* Optional spacing between progress bar and text */
+  }
+  
+  /* Add this style for the progress text */
+  .progress-text {
+    color: white;
+    text-align: center;
+    margin: 0;
+  }
+
+  .myForm-list {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#myFormTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#myFormTable th,
+#myFormTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#myFormTable thead {
+    background-color: #3498db;
+    color: #fff;
+}
+
+#myFormTable tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Add this CSS block for the user table */
+.user-list {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#userTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#userTable th,
+#userTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#userTable thead {
+    background-color: #27ae60;
+    color: #fff;
+}
+
+#userTable tbody tr:hover {
+    background-color: #ecf0f1;
+}
+
+/* Repeat the same styles for the progress-container, progress-bar, and progress-text if needed */
+
+
+
+@media (max-width: 768px) {
+    #myFormTable {
+        display: block;
+    }
+
+    #myFormTable thead {
+        display: none;
+    }
+
+    #myFormTable tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #myFormTable tbody td {
+        display: block;
+        text-align: left;
+        font-weight: bold;
+    }
+}

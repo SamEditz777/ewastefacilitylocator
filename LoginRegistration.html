@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Waste Facility Locator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald&display=swap">
+</head>
+
+<body>
+    <header>
+        <h2 class="logo">E-Waste Facility Locator</h2>
+        <nav class="navigation">
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+    </header>
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+        <p class="progress-text" id="progressText">Processing...</p>
+    </div>
+
+    <video autoplay muted loop playsinline id="video-background">
+        <source src="Img/pexels-engin-akyurt-10177347 (2160p).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="content-container">
+        <h1>Welcome to E-Waste Facility Locator</h1>
+        <h4><p>Find sustainable solutions for electronic waste disposal.</p></h4>
+    </div>
+
+    <div class="wrapper">
+        <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="javascript:void(0);"method="post" id="loginForm">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" id="email1" name="email1" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" id="password1" name="password1" required>
+                    <label>Password</label>
+                </div>
+              
+                <div class="remember-forgot">
+                    <label><input type="checkbox" name="remember"> Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn" id="lg">Login</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="javascript:void(0);"method="post" id="registerForm">
+                
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" id="email2" name="email2" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" id="password2" name="password2" required>
+                    <label>Password</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="business"></ion-icon></span>
+                    <select name="accounttype" id="accounttype" required>
+                        <option value="" disabled selected hidden>Account Type</option>
+                        <option value="individual">Individual</option>
+                        <option value="business">Business</option>
+                    </select>
+                   
+                </div>
+
+                <div class="remember-forgot">
+                    <label><input type="checkbox" name="agree"> I agree to the terms & conditions</label>
+                </div>
+                <button type="submit" class="btn" id="rg">Register</button>
+                <div class="login-register">
+                    <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <a href="https://api.whatsapp.com/send?phone=9321837912" target="_blank" class="whatsapp-icon">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+    </a>
+    <a href="mailto:manthanmss17@gmail.com" class="email-icon">
+        <ion-icon name="mail"></ion-icon>
+    </a>
+   
+    <script src="script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+<script type="module">
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword  } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDbuu0KlV8ekmtGJ9E3Iwey5m_HgwXRkt4",
+        authDomain: "lrpage-c4df4.firebaseapp.com",
+        databaseURL: "https://lrpage-c4df4-default-rtdb.firebaseio.com",
+        projectId: "lrpage-c4df4",
+        storageBucket: "lrpage-c4df4.appspot.com",
+        messagingSenderId: "34112080999",
+        appId: "1:34112080999:web:f2e6d34dd10eb0332ed8c2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+
+    rg.addEventListener('click', async (e) => {
+    // Show the progress container when Registration is clicked
+    document.getElementById('progressContainer').style.display = 'flex';
+
+    var email2 = document.getElementById('email2').value.trim();
+    var password2 = document.getElementById('password2').value;
+    var accounttype = document.getElementById('accounttype').value;
+
+    try {
+        await createUserWithEmailAndPassword(auth, email2, password2);
+
+        const user = auth.currentUser;
+        document.getElementById('progressText').textContent = 'Registering...';
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        set(ref(database, 'users/' + user.uid), {
+            email2: email2,
+            accounttype: accounttype
+        });
+
+        //alert('User created Successfully!');
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+    } finally {
+        // Hide the progress container after completion
+        document.getElementById('progressContainer').style.display = 'none';
+    }
+});
+
+
+lg.addEventListener('click', async (e) => {
+    // Show the progress container when Login is clicked
+    document.getElementById('progressContainer').style.display = 'flex';
+
+    var email1 = document.getElementById('email1').value.trim();
+    var password1 = document.getElementById('password1').value;
+
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email1, password1);
+        document.getElementById('progressText').textContent = 'Logging in...';
+        const user = userCredential.user;
+
+        // Check if the user is an admin based on predefined email and password
+        if (email1 === "admin@admin.com" && password1 === "admin@123456") {
+            // Redirect to Admin.html if the provided credentials are for admin
+            window.location.href = "Admin.html";  // Corrected line
+        } else {
+            // For regular users, you can redirect them to another page or handle accordingly
+            window.location.href = "home.html";
+        }
+    } catch (error) {
+        // Handle errors if the login fails
+        console.error("Error logging in:", error);
+        alert('Error logging in. Please try again.');
+    } finally {
+        // Hide the progress container after completion
+        document.getElementById('progressContainer').style.display = 'none';
+    }
+});
+
+</script>
+</html>

@@ -1,0 +1,476 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Oswald', sans-serif; /* Apply the Oswald font to the entire body */
+}
+
+#video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100vw;
+    height: 100vh;
+    object-fit: fill;
+    z-index: -1; /* Place the video behind other content */
+}
+
+
+header {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+padding: 15px 100px;
+
+display: flex;
+justify-content: space-between;
+align-items: center;
+z-index: 99;
+}
+
+.logo {
+    font-size: 2em;
+    color: #fff;
+    user-select: none;
+    }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .input-box label {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #40ff00;
+            pointer-events: none;
+            transition: 0.5s;
+            background-color: transparent;
+            padding: 0 5px;
+        }
+        
+        .input-box input,
+        .input-box select {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 1em;
+            color: #40ff00; 
+            font-weight: 600;
+            padding: 5px 0;
+        }
+        
+       
+        .input-box select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: transparent;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 5px;
+            cursor: pointer;
+            outline: none;
+            transition: box-shadow 0.3s;
+        }
+        
+        .input-box select:focus {
+            box-shadow: 0 0 5px rgba(255, 190, 190, 0.2);
+        }
+        
+        .input-box select option {
+            background-color: transparent;
+        }
+        
+        .input-box select option:checked {
+            background-color: #000000;
+        }
+         
+
+    .navigation .btnLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #40ff00;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.3em;
+    color: #40ff00;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+    }
+
+    .navigation .btnLogin-popup:hover {
+        background: #40ff00;
+        color: #ffffff;
+    }
+
+    .wrapper {
+        position: relative;
+        width: 400px;
+        height: 440px;
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, .5);
+        border-radius: 20px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        transform: scale(0);
+        transition: transform 0.5s ease, height 0.2s ease;
+    }
+    
+    .wrapper.active-popup {
+        transform: scale(1);
+    }
+    
+    .wrapper.active {
+        height: 520px;
+    }
+    
+    .wrapper .form-box {
+        width: 100%;
+        padding: 40px;
+    }
+    
+    .wrapper .form-box.login {
+        transition: transform 0.18s ease;
+        transform: translateX(0);
+    }
+    
+    .wrapper.active .form-box.login {
+        transition: none;
+        transform: translateX(-100%);
+    }
+    
+    .wrapper .form-box.register {
+        position: absolute;
+        transition: none;
+        transform: translateX(100%);
+    }
+    
+    .wrapper.active .form-box.register {
+        transition: transform 0.18s ease;
+        transform: translateX(0);
+    }
+    
+    .wrapper .icon-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45px;
+        height: 45px;
+        background: #40ff00;
+        font-size: 2em;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom-left-radius: 20px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+        .form-box h2 {
+            font-size: 2em;
+            color: #ffffff;
+            text-align: center;
+            }
+
+
+            .input-box {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            border-bottom: 2px solid #40ff00;
+            margin: 30px 0;
+            }
+
+
+            .input-box label {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            transform: translateY(-50%);
+            font-size: 1em;
+            color: #ffffff;
+            font-weight: 500;
+            pointer-events: none;
+            transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+top: -5px;
+}
+
+
+.input-box input {
+width: 100%;
+height: 100%;
+background: transparent;
+border: none;
+outline: none;
+font-size: 1em;
+color: #40ff00;
+font-weight: 600;
+padding: 035px 0 5px;
+}
+
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #000000;
+    line-height: 57px;
+    } 
+
+.remember-forgot {
+        font-size: .9em;
+        color: #ffffff;
+        font-weight: 500;
+        margin: -15px 0 15px;
+        display: flex;
+        justify-content: space-between;
+        }
+
+
+.remember-forgot label input {
+        accent-color: #40ff00;
+        margin-right: 3px;
+        }    
+
+
+        .remember-forgot a {
+            color: #ffffff;
+            text-decoration: none;
+            }
+
+            .remember-forgot a:hover{
+            text-decoration: underline;
+            }
+
+
+            .btn {
+                width: 100%;
+                height: 45px;
+                background: #40ff00;
+                border: none;
+                outline: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 1em;
+                color: #ffffff;
+                font-weight: 500;           
+            }
+
+.login-register {
+font-size: .9em;
+color: #40ff00;
+text-align: center;
+font-weight: 500;
+margin: 25px 0 10px;
+}
+
+
+                           .login-register p a {
+                            color: #ffffff;
+                            text-decoration: none;
+                            font-weight: 600;
+                            }
+
+
+                            .login-register p a:hover {
+                            text-decoration: underline;
+                            }
+
+
+                            .content{
+                                width: 1200px;
+                                height: auto;
+                                margin: auto;
+                                color: #40ff00;
+                                position: relative;
+                                }
+
+
+                                .content .par{
+                                padding-left: 20px;
+                                padding-bottom: 25px;
+                                font-family: Arial;
+                                letter-spacing: 1.2px;
+                                line-height: 30px;
+                                }
+
+
+                                .content h1{
+                                font-family: 'Times New Roman';
+                                font-size: 50px;
+                                padding-left: 20px;
+                                margin-top: 9%; 
+                                letter-spacing: 2px
+                                }
+                                .whatsapp-icon {
+                                    position: fixed;
+                                    bottom: 20px;
+                                    right: 20px;
+                                    background-color: #25D366; /* WhatsApp green color */
+                                    padding: 10px;
+                                    border-radius: 50%;
+                                    color: #fff;
+                                    text-decoration: none;
+                                    font-size: 24px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                  }
+
+                                  .email-icon {
+                                    position: fixed;
+                                    bottom: 20px;
+                                    right: 80px; /* Adjust the right distance to avoid overlapping with WhatsApp icon */
+                                    background-color: #007bff; /* Blue color for email */
+                                    padding: 10px;
+                                    border-radius: 50%;
+                                    color: #fff;
+                                    text-decoration: none;
+                                    font-size: 24px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                }
+
+                                .whatsapp-icon:hover,
+.email-icon:hover {
+    background-color: #128C7E; /* Darker green on hover for WhatsApp, darker blue for email */
+}
+
+.progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: none; /* Initially hide the progress container */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Higher z-index to make it appear above other elements */
+}
+
+/* Add this style for the progress bar */
+.progress-bar {
+    width: 50px; /* Adjust the width of the progress bar as needed */
+    height: 5px; /* Adjust the height of the progress bar as needed */
+    background-color: #4CAF50; /* Green color */
+    margin-bottom: 10px; /* Optional spacing between progress bar and text */
+}
+
+/* Add this style for the progress text */
+.progress-text {
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+
+.content-container {
+    text-align: center;
+    color: #fff; /* Set the text color to white */
+    padding: 20px;
+}
+
+.content-container h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.content-container p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: #40ff00;
+}
+
+
+@media screen and (max-width: 768px) {
+    header {
+        padding: 10px 15px; /* Adjust padding for smaller screens */
+    }
+
+    .logo {
+        font-size: 1.2em; /* Adjust font size for smaller screens */
+    }
+
+    .navigation .btnLogin-popup {
+        width: 100px; /* Adjust button width for smaller screens */
+        font-size: 1em; /* Adjust font size for smaller screens */
+        margin-left: 10px; /* Adjust margin for smaller screens */
+    }
+
+    .wrapper {
+        width: 90%;
+        max-height: 440px; /* Use max-height instead of height */
+        transition: transform 0.5s ease, max-height 0.2s ease; /* Use max-height instead of height */
+    }
+
+    .wrapper .form-box {
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    .wrapper.active {
+        max-height: 1000px; /* Adjust the max-height as needed */
+        transition: transform 0.5s ease, max-height 0.2s ease; /* Use max-height instead of height */
+    }
+
+    .content {
+        width: 100%; /* Adjust width for smaller screens */
+    }
+
+    .content h1 {
+        font-size: 30px; /* Adjust font size for smaller screens */
+        margin-top: 5%; /* Adjust margin for smaller screens */
+    }
+
+    .input-box label {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    .input-box input,
+    .input-box select {
+        font-size: 0.9em; /* Adjust font size for smaller screens */
+    }
+
+    .whatsapp-icon {
+        right: 10px; /* Adjust right distance for smaller screens */
+        bottom: 70px; /* Adjust bottom distance to avoid overlap */
+    }
+
+    .email-icon {
+        right: 10px; /* Adjust right distance for smaller screens */
+        bottom: 20px; /* Adjust bottom distance to avoid overlap */
+    }
+}

@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
+  overflow: hidden;
+  background: url('Img/3af96b72-21ce-42e2-8b6c-973a7d1789d4.jfif') center/cover no-repeat;
+  background-size: cover;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+  background-color: #333;
+}
+
+main {
+  margin-top: 80px; 
+}
+
+.logo {
+  font-size: 2em;
+  color: #fff;
+  user-select: none;
+}
+
+.navigation a {
+  position: relative;
+  font-size: 1.4em;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 40px;
+}
+
+.navigation a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: #40ff00;
+  border-radius: 5px;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.5s;
+}
+
+.navigation a:hover::after {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.navigation .btnLogout {
+  width: 130px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #ffffff;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.3em;
+  color: #ffffff;
+  font-weight: 500;
+  margin-left: 40px;
+  transition: 0.5s;
+}
+
+.navigation .btnLogout:hover {
+  background: #40ff00;
+  color: #000000;
+}
+
+form {
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 50px; /* Adjust the margin-top value as needed */
+  max-width: 400px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
+}
+
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+input[type="date"],
+input[type="time"] {
+  width: calc(50% - 10px);
+  margin-right: 10px;
+}
+
+#submit,
+#reset {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+#submit {
+  background-color: #007bff;
+  color: #fff;
+}
+
+#submit:hover {
+  background-color: #0056b3;
+}
+
+#reset {
+  background-color: #f00;
+  color: #fff;
+  margin-left: 10px;
+}
+
+#reset:hover {
+  background-color: #c00;
+}
+
+
+
+.whatsapp-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366; /* WhatsApp green color */
+  padding: 10px;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 80px; /* Adjust the right distance to avoid overlapping with WhatsApp icon */
+  background-color: #007bff; /* Blue color for email */
+  padding: 10px;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.whatsapp-icon:hover,
+.email-icon:hover {
+    background-color: #128C7E; /* Darker green on hover for WhatsApp, darker blue for email */
+}
+
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: none; /* Initially hide the progress container */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Higher z-index to make it appear above other elements */
+}
+
+/* Add this style for the progress bar */
+.progress-bar {
+  width: 50px; /* Adjust the width of the progress bar as needed */
+  height: 5px; /* Adjust the height of the progress bar as needed */
+  background-color: #4CAF50; /* Green color */
+  margin-bottom: 10px; /* Optional spacing between progress bar and text */
+}
+
+/* Add this style for the progress text */
+.progress-text {
+  color: white;
+  text-align: center;
+  margin: 0;
+}

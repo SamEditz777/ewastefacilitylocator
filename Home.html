@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Waste Facility Locator</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald&display=swap">
+</head>
+
+<body>
+    <header>
+        <h2 class="logo">E-Waste Facility Locator</h2>
+        <button class="toggle-sidebar" id="toggleSidebarBtn">&#9776;</button>
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="article-page.html">Article</a>
+            <a href="Services.html">Service</a>
+            <a href="Aboutus.html">About us</a>
+            <a href="BookAppointment.html">Book Appointment</a>
+            <button class="btnLogout" id="logoutBtn">Logout</button>
+        </nav>
+        
+    </header>
+    <div class="hero">
+    <h1>E-Waste Facility Locator</h1>
+    <p><b>"In the world of e-waste, every recycle is a revolution, a testament to our commitment to a cleaner, greener world."</b></p>
+    <button id="getStartedBtn">Get Cost Estimate</button>
+</div>
+   
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+        <p class="progress-text" id="progressText">Processing...</p>
+    </div>
+
+    <div class="container">
+        <div class="text-container">
+          <div class="text-content">
+            <h1>What is E-Waste?</h1>
+                <p>As our reliance on technology continues to grow, the issue of electronic waste (e-waste) becomes increasingly significant.E-waste encompasses a wide range of discarded electronic devices, including computers, smartphones, appliances, and other electronic gadgets that have outlived their usefulness. The accelerated pace of technological advancements contributes to the rapid generation of e-waste, resulting in environmental and health concerns.Electronic waste, commonly referred to as e-waste, represents a burgeoning challenge in our technologically driven society. This predicament intensifies with the constant evolution and proliferation of electronic devices, encompassing an extensive array of discarded gadgets like computers, smartphones, appliances, and various electronic peripherals that have surpassed their functional lifespan. As our reliance on technology deepens, the volume of e-waste continues to surge, posing significant environmental and health hazards.<br>
+                    The rapid pace of technological advancements, marked by shorter product life cycles and frequent upgrades, contributes substantially to the escalating generation of e-waste. Obsolescence sets in swiftly, rendering once-cutting-edge devices outdated and prompting users to discard them in favor of newer, more advanced counterparts. This incessant cycle of technological innovation and consumer demand exacerbates the e-waste crisis, creating a formidable challenge for waste management systems worldwide.</p>
+          </div>
+          <div class="img-container">
+            <img src="Img/e.jpeg" width="500" height="250" alt="Description of the first image">
+          </div>
+          <div class="text-content">
+            <h1>Did You Know: -</h1>
+                <p>E-waste statistics reveal a concerning trend in the global disposal of electronic devices. With approximately 53.6 million metric tons of e-waste generated in 2019, the issue demands immediate attention. Many regions, particularly in Asia, are contributing significantly to this mounting problem. Alarmingly, a large portion of e-waste is inadequately processed, leading to environmental and health hazards. Addressing this challenge requires heightened awareness, efficient recycling practices, and international cooperation to mitigate the impact of electronic waste on our planet. Asia, in particular, emerges as a significant contributor to the burgeoning e-waste dilemma. Rapid industrialization, coupled with the widespread adoption of technology, has led to an exponential increase in electronic device consumption across many Asian regions. However, this surge in electronic usage is accompanied by a parallel rise in improperly processed e-waste, exacerbating the environmental and health risks associated with electronic discards. It is essential to acknowledge the role of both developed and developing nations in this global predicament, as e-waste is not confined to specific geographical boundaries.
+                <br>The inadequacies in e-waste processing are alarming, with a substantial portion of discarded electronic devices not undergoing proper recycling or disposal. Improper handling of e-waste poses severe threats to the environment and human well-being. Toxic substances such as lead, mercury, and cadmium, commonly found in electronic components, can leach into soil and water, contaminating ecosystems and endangering biodiversity. Furthermore, the release of hazardous pollutants during the informal processing of e-waste in some regions compounds the environmental degradation, highlighting the urgent need for regulated and sustainable waste management practices.</p>
+          </div>
+          <div class="img-container">
+            <img src="Img/e2.jpg" width="500" height="250" alt="Description of the second image">
+          </div>
+        </div>
+      </div>
+     
+        <div id="deviceEstimateForm">
+            <h1>Cost Estimation Here:</h1>
+            <label for="category">Select Category:</label>
+            <select id="category" onchange="populateCompanies()">
+                <option value="">Select Category</option>
+                <option value="mobile">Mobiles</option>
+                <option value="laptop">Laptops</option>
+                <option value="tv">TV</option>
+            </select>
+        
+            <label for="company">Select Company:</label>
+            <select id="company" onchange="populateModels()">
+                <option value="">Select Company</option>
+            </select>
+        
+            <label for="model">Select Model:</label>
+            <select id="model">
+                <option value="">Select Model</option>
+            </select>
+        
+            <label for="age">Select Age (in years):</label>
+            <select id="age">
+                <option value="">Select Age</option>
+                <!-- You can dynamically populate this dropdown using JavaScript if needed -->
+                <option value="1">Less than or equal to 1 year</option>
+                <option value="2">2-3 years</option>
+                <option value="3">More than 3 years</option>
+                <!-- Add more options as needed -->
+            </select>
+        
+            <label for="condition">Select Working Condition:</label>
+            <select id="condition">
+                <option value="">Select Condition</option>
+                <option value="excellent">Excellent</option>
+                <option value="good">Good</option>
+                <option value="fair">Fair</option>
+                <!-- Add more options as needed -->
+            </select>
+        
+            <button onclick="getEstimate()">Get Estimate</button>
+        
+            <div id="estimateResult"></div>
+        </div>
+
+        <div class="feedback-form">
+            <h2>Add Feedback</h2>
+            <form id="userFeedbackForm">
+                <label for="userName">Name:</label>
+                <input type="name" id="userName" name="userName" required placeholder="Enter your Name">
+        
+                <label for="userFeedback">Feedback:</label>
+                <textarea id="userFeedback" name="userFeedback" required placeholder="Enter your feedback"></textarea>
+        
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
+
+
+        <a href="https://api.whatsapp.com/send?phone=9321837912" target="_blank" class="whatsapp-icon">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+        </a>
+        <a href="mailto:manthanmss17@gmail.com" class="email-icon">
+            <ion-icon name="mail"></ion-icon>
+        </a>
+
+        <div class="footer">
+            <p>Contact Us:</p>
+            <a href="tel:+91">932-183-7912</a> |
+            <a href="mailto:info@example.com">ewastefacility@gmail.com</a>
+            <p>Follow Us:</p>
+            <div class="additional-element">
+                <a href="https://www.facebook.com/YourFacebookPage" target="_blank">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+                <a href="https://twitter.com/YourTwitterPage" target="_blank">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/YourInstagramPage" target="_blank">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+            </div>
+            <p>&copy; 2024 E-Waste Facility Locator. All rights reserved.</p>
+        </div>
+
+    <script src="script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+<script type="module">
+    // Import Firebase authentication functions
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import { getDatabase, ref, update, push } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
+  
+    // Your Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDbuu0KlV8ekmtGJ9E3Iwey5m_HgwXRkt4",
+        authDomain: "lrpage-c4df4.firebaseapp.com",
+        projectId: "lrpage-c4df4",
+        storageBucket: "lrpage-c4df4.appspot.com",
+        messagingSenderId: "34112080999",
+        appId: "1:34112080999:web:f2e6d34dd10eb0332ed8c2"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+
+    // Update this JavaScript block in your existing script.js file
+    document.getElementById('userFeedbackForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const userName = document.getElementById('userName').value.trim();
+    const userFeedback = document.getElementById('userFeedback').value.trim();
+
+    // Reference to the feedback data in the database
+    const feedbackRef = ref(database, 'feedback');
+
+    // Push the new feedback to the database
+    push(feedbackRef, {
+        Name: userName,
+        feedback: userFeedback
+    });
+
+    // Clear the form fields
+    document.getElementById('userName').value = '';
+    document.getElementById('userFeedback').value = '';
+
+    alert('Feedback submitted successfully!');
+});
+
+  
+    // Logout button click event
+    const logoutBtn = document.getElementById('logoutBtn');
+  
+    logoutBtn.addEventListener('click', async () => {
+        
+        document.getElementById('progressContainer').style.display = 'flex';
+  
+        const user = auth.currentUser;
+        document.getElementById('progressText').textContent = 'Signing out...';
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        if (user) {
+            const uid = user.uid;
+            const dt = new Date().toString();
+  
+            try {
+                await update(ref(database, `users/${uid}`), { last_logout: dt });
+                //alert('User Logged Out!');
+                // Sign out
+                await signOut(auth);
+                // Redirect to index.html after successful logout
+                window.location.href = "LoginRegistration.html";
+            } catch (error) {
+                console.error("Logout Error", error);
+                // Handle errors if any during update or sign out
+            }
+            finally {
+        // Hide the progress container after completion
+        document.getElementById('progressContainer').style.display = 'none';
+    }
+        }
+    });
+  </script>
+</html>

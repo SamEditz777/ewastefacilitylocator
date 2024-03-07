@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Appointment Form</title>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js"></script>
+    <link rel="stylesheet" href="ba.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald&display=swap">
+</head>
+<body>
+    <header>
+        <h2 class="logo">E-Waste Facility Locator</h2>
+        <nav class="navigation">
+            <a href="Home.html">Home</a>
+            <a href="article-page.html">Article</a>
+            <a href="Services.html">Service</a>
+            <a href="Aboutus.html">About us</a>
+            <a href="#">Book Appointment</a>
+            <button class="btnLogout" id="logoutBtn">Logout</button>
+        </nav>
+    </header>
+
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+        <p class="progress-text" id="progressText">Processing...</p>
+    </div>
+
+    <form id="myForm">
+        <label for="name"><ion-icon name="person"></ion-icon>Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    
+        <label for="email"><ion-icon name="mail"></ion-icon>Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    
+        <label for="phone"><ion-icon name="call"></ion-icon>Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+    
+        <label for="Pincode"><ion-icon name="location"></ion-icon>Pincode:</label>
+        <input type="number" id="Pincode" name="Pincode" placeholder="Enter your Pincode" required>
+    
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" placeholder="Select a date" required>
+    
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" placeholder="Select a time" required>
+    
+        <button type="button" id="submit">Submit</button>
+        <button type="reset" id="reset">Reset</button>
+    </form>
+    
+
+    <a href="https://api.whatsapp.com/send?phone=9321837912" target="_blank" class="whatsapp-icon">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+    </a>
+    <a href="mailto:manthanmss17@gmail.com" class="email-icon">
+        <ion-icon name="mail"></ion-icon>
+    </a>
+   
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script type="module">
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+        import { getDatabase, ref, update, push } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbuu0KlV8ekmtGJ9E3Iwey5m_HgwXRkt4",
+            authDomain: "lrpage-c4df4.firebaseapp.com",
+            projectId: "lrpage-c4df4",
+            storageBucket: "lrpage-c4df4.appspot.com",
+            messagingSenderId: "34112080999",
+            appId: "1:34112080999:web:f2e6d34dd10eb0332ed8c2"
+        };
+
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(); 
+        const submitButton = document.getElementById('submit'); 
+        const database = getDatabase();    
+    
+        submitButton.addEventListener('click', async () => {
+    // Validate input fields
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const Pincode = document.getElementById('Pincode').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    // Pincode validation (example: 6 digits)
+    const pincodeRegex = /^\d{6}$/;
+    if (!pincodeRegex.test(Pincode)) {
+        alert('Please enter a valid 6-digit Pincode');
+        return;
+    }
+
+    // Phone number validation
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone)) {
+        alert('Please enter a valid 10-digit phone number');
+        return;
+    }
+
+    if (name === '' || Pincode === '' || date === '' || time === '') {
+        alert('Please fill in all fields');
+        return; // Exit the function if any required field is empty
+    }
+
+    document.getElementById('progressContainer').style.display = 'flex';
+    document.getElementById('progressText').textContent = 'Appointment Under Process, We will contact you soon to your Provided Email in 24 hrs.';
+    
+    try {
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        const formDataRef = ref(database, 'myForm');
+
+        push(formDataRef, {
+            name: name,
+            email: email,
+            phone: phone,
+            Pincode: Pincode,
+            date: date,
+            time: time
+        });
+
+    } finally {
+        // Reset the form after submission
+        document.getElementById('progressContainer').style.display = 'none';
+        document.getElementById('myForm').reload();
+    }
+});
+
+
+        const logoutBtn = document.getElementById('logoutBtn');
+    
+        logoutBtn.addEventListener('click', async () => {
+            document.getElementById('progressContainer').style.display = 'flex';
+    
+            const user = auth.currentUser;
+            document.getElementById('progressText').textContent = 'Signing out...';
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            if (user) {
+                const uid = user.uid;
+                const dt = new Date().toString();
+    
+                try {
+                    await update(ref(database, `users/${uid}`), { last_logout: dt });
+                    await signOut(auth);
+                    window.location.href = "LoginRegistration.html";
+                } catch (error) {
+                    console.error("Logout Error", error);
+                } finally {
+                    document.getElementById('progressContainer').style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

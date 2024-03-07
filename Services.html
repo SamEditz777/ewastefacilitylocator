@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service</title>
+    <link rel="stylesheet" href="service.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald&display=swap">
+    <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps.css">
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps-web.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <h2 class="logo">E-Waste Facility Locator</h2>
+        <nav class="navigation">
+            <a href="Home.html">Home</a>
+            <a href="article-page.html">Article</a>
+            <a href="#">Service</a>
+            <a href="Aboutus.html">About us</a>
+            <a href="BookAppointment.html">Book Appointment</a>
+            <button class="btnLogout" id="logoutBtn">Logout</button>
+        </nav>
+    </header>
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+        <p class="progress-text" id="progressText">Processing...</p>
+    </div>
+
+    <div class="search-container">
+        <h2 id="searchLocationTitle">Find a Facility Near You:</h2>
+        <input type="text" id="locationSearch" placeholder="Enter location...">
+        <button id="searchButton" onclick="searchLocation()">Search</button>
+    </div>
+
+    <div id="map" style="width: 100%; height: 500px; max-width: 800px; margin-top: 20px;">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    // Initialize the map
+    var map = tt.map({
+        key: "pVU4j7keGw5pSw6CylZQUc2gdMMTIJT2",
+        container: "map",
+        center: [72.97599322132886, 19.11012748989893], 
+        zoom: 10,
+    });
+
+    var markers = [
+
+        //Mumbai
+        { coordinates:[72.84439957331912, 19.012719720311377], name: "E-Waste Recycling World Computer Scrap Dealer | Scrap Buyer Adress:53 Gurudwara Bldg, opp. Chitra Cinema, Mumbai, Maharashtra 400014"  },
+        { coordinates:[72.88055362708266, 19.072557237219957],  name: "Green Life E-Waste Recycling- E-Waste Management | Battery Recycling Solutions | Electronic Waste India Address: Shiv Shakti Compound, C-5, near Server Hotel, Netaji Nagar, Ambedkar Nagar, Kurla West, Kurla, W, Mumbai, Maharashtra 400072"},
+        { coordinates:[72.87106627193351, 19.076259977701046],name: "Ecostar Recycling - E Waste Recycling Mumbai, Recycling Centre"},
+        { coordinates:[72.86917123943091, 19.071578402673516,], name: "Ecotech Recycling- E waste recycling Mumbai, E-Waste Recycling,E Waste Management in India"}, 
+        { coordinates:[72.88772300575219, 19.09863890306179], name: "E-Waste Mart,Address: GALA NO.36/ACTS NO. 362, PAHELWAN COMPOUND, 90 Feet Rd, Ashtavinayak CHS, Sathi D Souza Nagar, Saki Naka, Mumbai, Maharashtra 400072"},
+        { coordinates:[72.89401469973782, 19.086877188820715], name: "Kohinoor E-waste Recycling Pvt. Ltd. Address:Narayan nager, 7/12, Nari Seva Sadan Rd, opp. Union Bank, Gurunanak Nagar, Narayan Nagar, Ghatkopar (W, Mumbai, Maharashtra 400086"},
+        { coordinates:[72.83647045531035, 18.95255459371992], name: "E-Waste Management - E waste Recycling mumbai, E - Waste management in india Adress:Bhagwan Bhuvan, 197, Samuel St, Khand Bazar, Vadgadi, Masjid Bandar West, Mandvi, Mumbai, Maharashtra 400009"},
+        { coordinates:[72.85296923117026, 19.186252116782452], name: "E Waste Recycling India Address: Madina Manzil, Kedarmal Rd, near Asha Amar Building, Malad, Malad (E, Mumbai, Maharashtra 400097"},
+        { coordinates:[72.83686010034417, 19.134636593738307], name: "ANCUS INDIA REPROCESSING PVT LTD | E WASTE RECYCLING COMPANY Address: Unit no. 226, Shree Krishna Industrial CSL, on, Western Express Hwy, next to Dahisar Toll Naka, beside CNG Pump, Diamond Industrial Estate, Dahisar East, Mumbai, Maharashtra 400068"},
+        { coordinates:[72.89402500709232, 19.086505027992157], name: "5RCYCLE Foundation Address:27 CD, Government Industrial Estate Charkop, Charkop, Charkop Industrial Estate, Kandivali West, Mumbai, Maharashtra 400067"},
+        { coordinates:[72.95716644551385, 19.160753219545423], name: "Mahavir electronic waste recycling store. Address:Mithaghar Rd, Jaihind Colony, Tata Colony, Mulund East, Mumbai, Maharashtra 400081"},
+        { coordinates:[72.95341568601337, 19.16736076391034, ], name: "e-waste & old paper mart Address: Mithaghar Rd, Patil Nagar, LIC Housing Colony, Mulund East, Mumbai, Maharashtra 400081"},
+
+        //Navi Mumbai.
+        { coordinates:[73.00724836613539, 19.068586011327334], name: " Green India E-Waste & Recycling Opc Pvt. Ltd. address:The Corporate Park, 707, Plot No.14, Sector 18, Vashi, Navi Mumbai, Maharashtra 400703"},
+        { coordinates:[72.99839218202352, 19.159985531293756], name: "E-waste recycling store Address: G71, near Aroli, Sector 3, Airoli, Navi Mumbai, Maharashtra 400708"},
+
+        //Panvel
+        { coordinates:[73.07070464129437, 18.969047091297252,], name: "RECYCLING FUTURE address:plot no 169 At-Bhangarpada,Post-Kundevahall,Tal, Panvel, Navi Mumbai, Maharashtra 410206"},
+
+        //Bhiwandi
+        { coordinates:[ 73.15787197345462, 19.328436046354287], name: "Right Ewaste Recycle Private Limited address:Bldg no. C-01, 1st floor ,Antariksh Logidrome, S. No.40/2/C,40/3,Village - Aamne, Bhiwandi, Maharashtra 421302"},
+        
+        //Nashik.
+        { coordinates:[73.79111671166082,20.002791008527215 ], name: "Techeco Ewaste Namo address: 155/B/2 Dhakambe, Dindori, Maharashtra 422001"},
+        { coordinates:[73.75819444413762,19.952938433278373], name: "Scrapwale address: 02 Saptshrungi Darshan RH SRNO 297/1A PLNO 74 Anand Nagar BH GST Bhavan, Pathardi Phata, Nashik, Maharashtra 422010"},
+        { coordinates:[73.73793840198248,19.938738370172587], name: "Nashik Waste Management Private Limited address:WPMQ+CQ5, Nashik, Maharashtra 422010"},
+        { coordinates:[73.89623064304861,20.084983456226556], name: "Sesha E Waste Recycling address:3VHW+76M, Unnamed Road, Bajrang Nagar, Maharashtra 422207"},
+
+        //Pune.
+        { coordinates:[73.8575027513431, 18.450038194545353], name: "Kuldeep E-Waste Disposals - E Waste Buyer Pune address:Manikmoti Complex, Office No.13, Katraj, Off, Pune - Satara Rd, opp. Kanchan Hp Gas Agency, Pune, Maharashtra 411046"},
+        { coordinates:[73.85255588798222,18.472769837170354], name: "SWaCH E-Waste Collection Center address:32/1, Dhankawadi Rd, Saragam Society 1, Anant Nagar, Kala Nagar, Dhankawadi, Pune, Maharashtra 411043"},
+        { coordinates:[73.8631767803548, 18.516748292492277], name: "Sayma E-waste Pune address:Shop No.6, Chandraprakash Apt, 252, Ganesh Peth Rd, Bodke Wada, New Nana Peth, Ganesh Peth, Pune, Maharashtra 411002"},
+        { coordinates:[73.93392337935121,18.57140815743804], name: "Ewaste Global Collection Point address:Nagar Rd, Pune International Airport Area, Viman Nagar, Pune, Maharashtra 411014"},
+    
+        //Nagpur.
+        { coordinates:[79.07941840125196, 21.160339268934752], name: "Suritex Pvt Ltd - Electronic Waste Recyclers address:Admn Office 5&6, Zal Complex, Residency Rd, opp. SFS school, above Roast café, Sadar, Nagpur, Maharashtra 440001"},
+        { coordinates:[79.11909924178846, 21.153312928620647], name: "Nagraj E-waste Recycling address:Flat No.004, Om Maa Bamleshwari App, near Patidar Bhavan, Queta Colony, Bagadganj, Nagpur, Maharashtra 440008"},
+        { coordinates:[79.11359542429383, 21.17771118585593], name: "Jagdish E-Waste Recycle address:Nai Basti Rd, Mangalwari Bazar, Sadar, Nagpur, Maharashtra 440001"},
+        
+        //Aurangabad.
+        { coordinates:[75.38684869379503,19.88284855763594], name: "Green e-Bin E-waste Recycling address:B-18, MIDC Industrial Area, Chilkalthana, Aurangabad, Maharashtra 431006"},
+        { coordinates:[75.4117916828985,19.870017202713008], name: "ERECON RECYCLING address:Shri Krishna Colony, Chilkalthana, Aurangabad, Maharashtra 431007"},
+        { coordinates:[75.38248114826669,19.879776062008364], name: "PERFECT E- WASTE RECYCLERS address:Plot No. A, 8/1, MIDC Industrial Area, Chilkalthana, Aurangabad, Maharashtra 431006"},
+        
+        //Ratnagiri.
+        { coordinates:[73.315746,16.999939], name: "AllScrapwala  address:C 74, midc, Mirjole, Madhaliwadi, Maharashtra 415639"},
+
+        //Kolhapur.
+        { coordinates:[74.22027601496653,16.7014654959481], name:"Prospark Recyclers  address:1704, ganji galli, C Ward, somwar peth, Kolhapur, Maharashtra 416002"},
+        { coordinates:[74.22246469747937,16.68913360811858], name: "Magnus E-waste Management address:1731, B Ward, New Mahadwar Rd, Mangalwar Peth, C Ward, Kolhapur, Maharashtra 416012"},
+        { coordinates:[74.22687122424864,16.674403516278716], name: "Shaikh scrap yard. address:Rajrshi shahu housing socity, near hockey Stediyam, near durga mata mandir Nirman chuk, Kolhapur, Maharashtra 416012"},
+
+        ];
+
+    // Add markers to the map
+    markers.forEach((marker) => {
+        var ttMarker = new tt.Marker().setLngLat(marker.coordinates).addTo(map);
+        ttMarker.setPopup(new tt.Popup().setHTML(`<p>${marker.name}</p>`));
+    });
+
+    // Function to search for a location
+    window.searchLocation = async function () {
+        var location = document.getElementById("locationSearch").value.trim();
+
+        if (location === "") {
+            alert("Please enter a valid location");
+            return;
+        }
+
+        const apiKey = "pVU4j7keGw5pSw6CylZQUc2gdMMTIJT2";
+        const encodedLocation = encodeURIComponent(location);
+
+        try {
+            const response = await fetch(`https://api.tomtom.com/search/2/geocode/${encodedLocation}.json?key=${apiKey}`);
+            const data = await response.json();
+
+            if (data.results && data.results.length > 0) {
+                const result = data.results[0];
+                const { lat, lon } = result.position;
+
+                // Update the map to the geocoded location
+                map.flyTo({ center: [lon, lat], zoom: 12 });
+
+                // Add a new marker for the geocoded location
+                var newMarker = new tt.Marker().setLngLat([lon, lat]).addTo(map);
+                newMarker.setPopup(new tt.Popup().setHTML(`<p>${location}</p>`));
+            } else {
+                alert("Location not found");
+            }
+        } catch (error) {
+            console.error("Error fetching location:", error);
+            alert("An error occurred while fetching the location. Please try again.");
+        }
+    };
+});
+</script>
+</div>
+<script type="module">
+    // Import Firebase authentication functions
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDbuu0KlV8ekmtGJ9E3Iwey5m_HgwXRkt4",
+        authDomain: "lrpage-c4df4.firebaseapp.com",
+        projectId: "lrpage-c4df4",
+        storageBucket: "lrpage-c4df4.appspot.com",
+        messagingSenderId: "34112080999",
+        appId: "1:34112080999:web:f2e6d34dd10eb0332ed8c2"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+
+    // Logout button click event
+    logoutBtn.addEventListener('click', async () => {
+        
+        document.getElementById('progressContainer').style.display = 'flex';
+
+        const user = auth.currentUser;
+        document.getElementById('progressText').textContent = 'Signing out...';
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        if (user) {
+            const uid = user.uid;
+            const dt = new Date().toString();
+
+            try {
+                await update(ref(database, `users/${uid}`), { last_logout: dt });
+                //alert('User Logged Out!');
+                // Sign out
+                await signOut(auth);
+                // Redirect to index.html after successful logout
+                window.location.href = "LoginRegistration.html";
+            } catch (error) {
+                console.error("Logout Error", error);
+                // Handle errors if any during update or sign out
+            }
+            finally {
+        // Hide the progress container after completion
+        document.getElementById('progressContainer').style.display = 'none';
+    }
+        }
+    });
+</script>
+      <a href="https://api.whatsapp.com/send?phone=9321837912" target="_blank" class="whatsapp-icon">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+    </a>
+
+    <!-- Email icon -->
+    <a href="mailto:manthanmss17@gmail.com" class="email-icon">
+        <ion-icon name="mail"></ion-icon>
+    </a>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    </body>
+</html>

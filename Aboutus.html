@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Us</title>
+    <link rel="stylesheet" href="Aboutus.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald&display=swap">
+</head>
+<body>
+    <header>
+        <h2 class="logo">E-Waste Facility Locator</h2>
+        <nav class="navigation">
+            <a href="Home.html">Home</a>
+            <a href=article-page.html#">Article</a>
+            <a href="Services.html">Service</a>
+            <a href="#">About us</a>
+            <a href="BookAppointment.html">Book Appointment</a>
+            <button class="btnLogout" id="logoutBtn">Logout</button>
+        </nav>
+    </header>
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+        <p class="progress-text" id="progressText">Processing...</p>
+    </div>
+    <div class="container">
+        <div class="text-container">
+            <h3>About Us</h3>
+            <p>We are a passionate and dedicated team at E-Waste Facility Locator, committed to making a positive impact on the environment through innovative solutions for E-Waste Management. Our mission is to revolutionize the way electronic waste is handled, reducing its environmental footprint and promoting sustainable practices.</p>
+            <p>Our team of skilled professionals works tirelessly to develop efficient and eco-friendly solutions that contribute to a greener and cleaner future.</p>
+            <p>With a focus on sustainability, responsibility, and technological innovation, we strive to be a leading force in the field of e-waste management. Join us on this journey towards a more environmentally conscious and technologically advanced future.</p>
+            
+            <h3>Contact Us</h3>
+            <p>If you have any inquiries or would like to get in touch with us, feel free to email us at <a href="mailto:ewastefacility@gmail.com">ewastefacility@gmail.com</a>. You can also visit our office at:</p>
+            <address>
+                E-Waste Facility Locator,<br>
+                Vidyalankar Polytechnic,<br>
+                Wadala, Mumbai<br>
+                Zip Code: 400037
+            </address>
+        </div>
+    </div>
+    
+    <script type="module">
+        // Import Firebase authentication functions
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+        import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
+    
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbuu0KlV8ekmtGJ9E3Iwey5m_HgwXRkt4",
+            authDomain: "lrpage-c4df4.firebaseapp.com",
+            projectId: "lrpage-c4df4",
+            storageBucket: "lrpage-c4df4.appspot.com",
+            messagingSenderId: "34112080999",
+            appId: "1:34112080999:web:f2e6d34dd10eb0332ed8c2"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+    
+        // Logout button click event
+        const logoutBtn = document.getElementById('logoutBtn');
+        logoutBtn.addEventListener('click', async () => {
+        
+        document.getElementById('progressContainer').style.display = 'flex';
+
+        const user = auth.currentUser;
+        document.getElementById('progressText').textContent = 'Signing out...';
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        if (user) {
+            const uid = user.uid;
+            const dt = new Date().toString();
+
+            try {
+                await update(ref(database, `users/${uid}`), { last_logout: dt });
+                //alert('User Logged Out!');
+                // Sign out
+                await signOut(auth);
+                // Redirect to index.html after successful logout
+                window.location.href = "LoginRegistration.html";
+            } catch (error) {
+                console.error("Logout Error", error);
+                // Handle errors if any during update or sign out
+            }
+            finally {
+        // Hide the progress container after completion
+        document.getElementById('progressContainer').style.display = 'none';
+    }
+        }
+    });
+</script>
+    <a href="https://api.whatsapp.com/send?phone=9321837912" target="_blank" class="whatsapp-icon">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+    </a>
+
+    <!-- Email icon -->
+    <a href="mailto:manthanmss17@gmail.com" class="email-icon">
+        <ion-icon name="mail"></ion-icon>
+    </a>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

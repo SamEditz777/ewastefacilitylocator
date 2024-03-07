@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
+  overflow: hidden;
+  background: url('Img/bg1.jpg') center/cover no-repeat;
+  background-size: cover;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+  background-color: #333;
+}
+
+.logo {
+  font-size: 2em;
+  color: #fff;
+  user-select: none;
+}
+
+.navigation a {
+  position: relative;
+  font-size: 1.3em;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 40px;
+}
+
+.navigation a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: #40ff00;
+  border-radius: 5px;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.5s;
+}
+
+.navigation a:hover::after {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.navigation .btnLogout {
+  width: 130px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #ffffff;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.3em;
+  color: #ffffff;
+  font-weight: 500;
+  margin-left: 40px;
+  transition: 0.5s;
+}
+
+.navigation .btnLogout:hover {
+  background: #40ff00;
+  color: #000000;
+}
+
+.articles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  min-height: 100vh;
+  overflow-y: auto; /* Add a vertical scrollbar when needed */
+  max-height: 80vh; /* Set a maximum height for the scrollbar */
+  padding-top: 70px; /* Adjust this value based on the height of your header */
+  padding-right: 15px; /* Add a right padding to prevent content from shifting */
+}
+
+
+.article {
+  width: calc(30% - 20px);
+  height: 400px;
+  margin: 20px;
+  background-color: #000000a5;
+  border-radius: 8px;
+  overflow: hidden;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+}
+
+.article-content {
+  padding: 20px;
+}
+
+.article-content h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #40ff00;
+}
+
+.article-content p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.article-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.article-image:hover {
+  opacity: 0.8;
+}
+
+.article a {
+  margin-top: auto; /* Push the "Read more" button to the bottom */
+  text-decoration: none;
+  color: inherit;
+}
+
+.article a:hover {
+  text-decoration: underline;
+}
+
+.article:nth-child(3n+1) {
+  margin-left: 0;
+}
+
+.article:nth-child(3n+3) {
+  margin-right: 0;
+}
+
+.article:nth-child(3) ~ .article:nth-child(4) {
+  margin-top: 40px;
+}
+
+.article:nth-child(n+4) {
+  width: calc(30% - 20px);
+  margin: 20px;
+}
+
+.read-more {
+  display: block;
+  padding: 10px;
+  text-align: center;
+  background-color: #40ff00;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.read-more:hover {
+  background-color: #40ff00;
+}
+
+.whatsapp-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366; /* WhatsApp green color */
+  padding: 10px;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 80px; /* Adjust the right distance to avoid overlapping with WhatsApp icon */
+  background-color: #007bff; /* Blue color for email */
+  padding: 10px;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.whatsapp-icon:hover,
+.email-icon:hover {
+    background-color: #128C7E; /* Darker green on hover for WhatsApp, darker blue for email */
+}
+
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: none; /* Initially hide the progress container */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Higher z-index to make it appear above other elements */
+}
+
+/* Add this style for the progress bar */
+.progress-bar {
+  width: 50px; /* Adjust the width of the progress bar as needed */
+  height: 5px; /* Adjust the height of the progress bar as needed */
+  background-color: #4CAF50; /* Green color */
+  margin-bottom: 10px; /* Optional spacing between progress bar and text */
+}
+
+/* Add this style for the progress text */
+.progress-text {
+  color: white;
+  text-align: center;
+  margin: 0;
+}
